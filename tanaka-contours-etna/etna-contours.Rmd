@@ -1,0 +1,107 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an example of how to update the cover art of GA using generative art. This is a cover from 1970:
+![GA cover with contours](https://twitter.com/paezha/status/1486487267359219723/photo/1)
+
+An update would be colorful, but still make references to geographically relevant stuff! [Tanaka contours](http://wiki.gis.com/wiki/index.php/Tanaka_contours) sounds like a lovely idea.
+
+I will use the following packages:
+```{r message=FALSE}
+library(elevatr) # To get elevation data
+library(MexBrewer) # Color palettes
+library(metR) # For contouring 
+library(showtext) # For importing fonts
+library(terra) # To work with rasters
+library(tidyverse) # Data carpentry and ggplot2
+```
+
+## Load fonts
+
+Import Google Fonts
+```{r}
+font_add_google("Amatic SC", "pressstart")
+
+showtext_auto()
+```
+
+
+Use {elevatr} to get elevation data:
+```{r}
+
+etna <- get_elev_raster(locations = data.frame(x = c(14.3534, 15.6234), 
+                                               y = c(36.8466, 38.736)),
+                        z = 10, 
+                        prj = "EPSG:4326",
+                        clip = "locations")
+```
+
+Convert to {terra} `SpatRaster` object and thereof to data frame:
+```{r}
+etna <- rast(etna)
+
+etna <- as.data.frame(etna, 
+                      xy = TRUE) %>%
+  rename(elev = 3)
+```
+
+Plot contours; use a palette from [{MexBrewer}](https://github.com/paezha/MexBrewer):
+```{r}
+cols <- mex.brewer("Alacena", n = 11)
+
+ggplot(data = etna,
+       aes(x, y, z = elev)) +
+  geom_contour_filled(breaks = seq(min(etna$elev), 
+                                   max(etna$elev), 
+                                   length.out = 11)) +
+  #geom_contour_tanaka() + 
+  scale_fill_manual(values = cols) +
+  coord_equal()
+```
+
+Repeat plot but now with Tanaka countours:
+```{r}
+ggplot(data = etna,
+       aes(x, y, z = elev)) +
+  geom_contour_filled(breaks = seq(min(etna$elev), 
+                                   max(etna$elev), 
+                                   length.out = 11)) +
+  geom_contour_tanaka(sun.angle = 60, 
+                      smooth = 10) + 
+  scale_fill_manual(values = cols) +
+  ggtitle("ETNA") +
+  labs(subtitle = "Italy", caption = "@paezha@mastodon.online") +
+  coord_equal() +
+  theme_void() + 
+  theme(legend.position = "none",
+        plot.background = element_rect(color = NA,
+                                       fill = cols[11]),
+        plot.title = element_text(color = "white",
+                                  face = "bold",
+                                  size = 100, 
+                                  hjust = 0.5,
+                                  vjust = -3),
+        plot.subtitle = element_text(color = "white",
+                                     size = 80, 
+                                     hjust = 0.5,
+                                     vjust = -142),
+        plot.caption = element_text(color = "white",
+                                    size = 40,
+                                    hjust = 0.9,
+                                    vjust = 14))
+
+
+ggsave("etna-tanaka-contours.png",
+       #width = 8,
+       height = 12,
+       units = "in")
+```
+
+  geom_text(aes(x = -98.675, y = 19.10),
+            label = ,
+            size = )
+
+    subtitle = "México",
+    caption = "@paezha"
