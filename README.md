@@ -23,6 +23,13 @@ Etna](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-etna)
 # 
 
 [Mount
+Stromboli](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-stromboli)
+
+<img src="tanaka-contours-stromboli/stromboli-tanaka-contours.png" align="center" width=300 />
+
+# 
+
+[Mount
 Vesuvius](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-vesuvius)
 
 <img src="tanaka-contours-vesuvius/vesuvius-tanaka-contours.png" align="center" width=300 />
