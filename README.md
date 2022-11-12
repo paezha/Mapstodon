@@ -40,3 +40,10 @@ Vesuvius](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-vesuvi
 Vulture](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-vulture)
 
 <img src="tanaka-contours-vulture/vulture-tanaka-contours.png" align="center" width=300 />
+
+# 
+
+[Puy de
+Sancy](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-puy-de-sancy)
+
+<img src="tanaka-contours-puy-de-sancy/sancy-tanaka-contours.png" align="center" width=300 />
