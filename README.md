@@ -11,7 +11,7 @@ This repository is where I keep mapping projects that I share on
 
 ## Contents
 
--   [Tanaka Contours](#tanaka-contours)
+- [Tanaka Contours](#tanaka-contours)
 
 ## Tanaka Contours
 
@@ -26,6 +26,13 @@ Etna](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-etna)
 Stromboli](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-stromboli)
 
 <img src="tanaka-contours-stromboli/stromboli-tanaka-contours.png" align="center" width=300 />
+
+# 
+
+[Mount
+Taranaki](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-taranaki)
+
+<img src="tanaka-contours-taranaki/taranaki-tanaka-contours.png" align="center" width=300 />
 
 # 
 

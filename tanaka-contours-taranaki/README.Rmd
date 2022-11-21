@@ -11,9 +11,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Askja
+# Taranaki
 
-In this notebook I create a contour map of stratovolcano Askja in Iceland. The map uses open data and [Tanaka contours](http://wiki.gis.com/wiki/index.php/Tanaka_contours).
+In this notebook I create a contour map of stratovolcano Taranaki in New Zealand. The map uses open data and [Tanaka contours](http://wiki.gis.com/wiki/index.php/Tanaka_contours).
 
 I will use the following packages:
 ```{r message=FALSE}
@@ -39,18 +39,19 @@ showtext_auto()
 Use {elevatr} to get elevation data:
 ```{r}
 
-askja <- get_elev_raster(locations = data.frame(x = c(16.5685, 16.9285), 
-                                               y = c(64.5511, 65.2511)),
+taranaki <- get_elev_raster(locations = data.frame(x = c(174.0134, 174.1034), 
+                                               y = c(-39.2068, -39.3868)),
                         z = 10, 
                         prj = "EPSG:4326",
                         clip = "locations")
 ```
+° S, 
 
 Convert to {terra} `SpatRaster` object and thereof to data frame:
 ```{r}
-askja <- rast(askja)
+taranaki <- rast(taranaki)
 
-askja <- as.data.frame(askja, 
+taranaki <- as.data.frame(taranaki, 
                       xy = TRUE) %>%
   rename(elev = 3)
 ```
@@ -59,10 +60,10 @@ Plot contours; use a palette from [{MexBrewer}](https://github.com/paezha/MexBre
 ```{r}
 cols <- mex.brewer("Alacena", n = 11)
 
-ggplot(data = askja,
+ggplot(data = taranaki,
        aes(x, y, z = elev)) +
-  geom_contour_filled(breaks = seq(min(askja$elev), 
-                                   max(askja$elev), 
+  geom_contour_filled(breaks = seq(min(taranaki$elev), 
+                                   max(taranaki$elev), 
                                    length.out = 11)) +
   #geom_contour_tanaka() + 
   scale_fill_manual(values = cols) +
@@ -71,16 +72,16 @@ ggplot(data = askja,
 
 Repeat plot but now with Tanaka countours:
 ```{r fig.show='hide'}
-ggplot(data = askja,
+ggplot(data = taranaki,
        aes(x, y, z = elev)) +
-  geom_contour_filled(breaks = seq(min(askja$elev), 
-                                   max(askja$elev), 
+  geom_contour_filled(breaks = seq(min(taranaki$elev), 
+                                   max(taranaki$elev), 
                                    length.out = 11)) +
   geom_contour_tanaka(sun.angle = 60, 
                       smooth = 10) + 
   scale_fill_manual(values = cols) +
-  ggtitle("ASKJA") +
-  labs(subtitle = "Iceland", caption = "@paezha@mastodon.online") +
+  ggtitle("TARANAKI") +
+  labs(subtitle = "New Zealand", caption = "@paezha@mastodon.online") +
   coord_equal() +
   theme_void() + 
   theme(legend.position = "none",
@@ -100,11 +101,11 @@ ggplot(data = askja,
                                     hjust = 0.9,
                                     vjust = 14))
 
-ggsave("askja-tanaka-contours.png",
+ggsave("taranaki-tanaka-contours.png",
        #width = 8,
        height = 12,
        units = "in")
 ```
 
 
-![](askja-tanaka-contours.png)
+![](taranaki-tanaka-contours.png)

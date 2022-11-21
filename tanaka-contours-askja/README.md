@@ -46,8 +46,7 @@ askja <- get_elev_raster(locations = data.frame(x = c(16.5685, 16.9285),
 #> Note: Elevation units are in meters.
 ```
 
-65.0111° N, 16.7485° W Convert to {terra} `SpatRaster` object and
-thereof to data frame:
+Convert to {terra} `SpatRaster` object and thereof to data frame:
 
 ``` r
 askja <- rast(askja)

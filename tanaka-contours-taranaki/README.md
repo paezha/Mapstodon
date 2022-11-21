@@ -1,25 +1,20 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+# Taranaki
 
-# Askja
-
-In this notebook I create a contour map of stratovolcano Askja in Iceland. The map uses open data and [Tanaka contours](http://wiki.gis.com/wiki/index.php/Tanaka_contours).
+In this notebook I create a contour map of stratovolcano Taranaki in New
+Zealand. The map uses open data and [Tanaka
+contours](http://wiki.gis.com/wiki/index.php/Tanaka_contours).
 
 I will use the following packages:
-```{r message=FALSE}
+
+``` r
 library(elevatr) # To get elevation data
+#> Warning: package 'elevatr' was built under R version 4.2.2
 library(MexBrewer) # Color palettes
 library(metR) # For contouring 
+#> Warning: package 'metR' was built under R version 4.2.2
 library(showtext) # For importing fonts
 library(terra) # To work with rasters
 library(tidyverse) # Data carpentry and ggplot2
@@ -28,7 +23,8 @@ library(tidyverse) # Data carpentry and ggplot2
 ## Load fonts
 
 Import Google Fonts:
-```{r}
+
+``` r
 font_add_google("Amatic SC", "pressstart")
 
 showtext_auto()
@@ -37,50 +33,62 @@ showtext_auto()
 ## Retrieve open elevation data
 
 Use {elevatr} to get elevation data:
-```{r}
 
-askja <- get_elev_raster(locations = data.frame(x = c(16.5685, 16.9285), 
-                                               y = c(64.5511, 65.2511)),
+``` r
+
+taranaki <- get_elev_raster(locations = data.frame(x = c(174.0134, 174.1034), 
+                                               y = c(-39.2068, -39.3868)),
                         z = 10, 
                         prj = "EPSG:4326",
                         clip = "locations")
+#> Mosaicing & Projecting
+#> Clipping DEM to locations
+#> Note: Elevation units are in meters.
 ```
 
-Convert to {terra} `SpatRaster` object and thereof to data frame:
-```{r}
-askja <- rast(askja)
+° S,
 
-askja <- as.data.frame(askja, 
+Convert to {terra} `SpatRaster` object and thereof to data frame:
+
+``` r
+taranaki <- rast(taranaki)
+
+taranaki <- as.data.frame(taranaki, 
                       xy = TRUE) %>%
   rename(elev = 3)
 ```
 
-Plot contours; use a palette from [{MexBrewer}](https://github.com/paezha/MexBrewer):
-```{r}
+Plot contours; use a palette from
+[{MexBrewer}](https://github.com/paezha/MexBrewer):
+
+``` r
 cols <- mex.brewer("Alacena", n = 11)
 
-ggplot(data = askja,
+ggplot(data = taranaki,
        aes(x, y, z = elev)) +
-  geom_contour_filled(breaks = seq(min(askja$elev), 
-                                   max(askja$elev), 
+  geom_contour_filled(breaks = seq(min(taranaki$elev), 
+                                   max(taranaki$elev), 
                                    length.out = 11)) +
   #geom_contour_tanaka() + 
   scale_fill_manual(values = cols) +
   coord_equal()
 ```
 
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
 Repeat plot but now with Tanaka countours:
-```{r fig.show='hide'}
-ggplot(data = askja,
+
+``` r
+ggplot(data = taranaki,
        aes(x, y, z = elev)) +
-  geom_contour_filled(breaks = seq(min(askja$elev), 
-                                   max(askja$elev), 
+  geom_contour_filled(breaks = seq(min(taranaki$elev), 
+                                   max(taranaki$elev), 
                                    length.out = 11)) +
   geom_contour_tanaka(sun.angle = 60, 
                       smooth = 10) + 
   scale_fill_manual(values = cols) +
-  ggtitle("ASKJA") +
-  labs(subtitle = "Iceland", caption = "@paezha@mastodon.online") +
+  ggtitle("TARANAKI") +
+  labs(subtitle = "New Zealand", caption = "@paezha@mastodon.online") +
   coord_equal() +
   theme_void() + 
   theme(legend.position = "none",
@@ -100,11 +108,11 @@ ggplot(data = askja,
                                     hjust = 0.9,
                                     vjust = 14))
 
-ggsave("askja-tanaka-contours.png",
+ggsave("taranaki-tanaka-contours.png",
        #width = 8,
        height = 12,
        units = "in")
+#> Saving 7 x 12 in image
 ```
 
-
-![](askja-tanaka-contours.png)
+![](taranaki-tanaka-contours.png)
