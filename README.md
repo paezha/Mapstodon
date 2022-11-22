@@ -23,6 +23,13 @@ Etna](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-etna)
 # 
 
 [Mount
+Ngauruhoe](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-ngauruhoe)
+
+<img src="tanaka-contours-ngauruhoe/ngauruhoe-tanaka-contours.png" align="center" width=300 />
+
+# 
+
+[Mount
 Stromboli](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-stromboli)
 
 <img src="tanaka-contours-stromboli/stromboli-tanaka-contours.png" align="center" width=300 />
