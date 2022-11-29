@@ -15,6 +15,13 @@ This repository is where I keep mapping projects that I share on
 
 ## Tanaka Contours
 
+[Mauna
+Loa](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-maunaloa)
+
+<img src="tanaka-contours-maunaloa/maunaloa-tanaka-contours.png" align="center" width=300 />
+
+# 
+
 [Mount
 Etna](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-etna)
 

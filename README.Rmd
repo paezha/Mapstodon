@@ -24,6 +24,12 @@ This repository is where I keep mapping projects that I share on [Mastodon](http
 
 ## Tanaka Contours {#tanaka-contours}
 
+[Mauna Loa](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-maunaloa)
+
+<img src="tanaka-contours-maunaloa/maunaloa-tanaka-contours.png" align="center" width=300 />
+
+#
+
 [Mount Etna](https://github.com/paezha/Mapstodon/tree/master/tanaka-contours-etna)
 
 <img src="tanaka-contours-etna/etna-tanaka-contours.png" align="center" width=300 />
